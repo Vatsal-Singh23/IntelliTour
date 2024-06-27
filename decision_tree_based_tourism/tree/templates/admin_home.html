@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IntelliTour</title>
+    <style>
+        body {
+        margin: 0;
+        padding: 0;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("/static/images/admin_home.webp");
+        }
+
+
+
+    .typewriter h1 {
+  overflow: hidden; 
+  border-right: .15em solid orange;
+  white-space: nowrap; 
+  margin: 0 auto; 
+  letter-spacing: .15em; 
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite,
+    color_change 64s infinite;
+}
+
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color:blue; }
+}
+
+@keyframes color_change 
+        {
+        0%,100%{
+           color: black;
+        }
+        25%{
+            color: white;
+        }
+        50%{
+            color: black;
+        }
+        75%{
+            color: white;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    {% include 'admin_navigation.html' %}
+    <div class="row m-auto">
+        <div class="col-1"></div>
+        <div class="col-4 mt-5 userhome-main">
+            <div class="welcome-name">
+                <div class="typewriter color_change">
+                    <h1 style="font-size: 35px;">Welcome To Admin</h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+{% include 'footer.htm' %}

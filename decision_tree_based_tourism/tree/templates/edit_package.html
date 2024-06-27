@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IntelliTour</title>
+    <style>
+        body {
+            background-image: url("/static/images/add1.avif");
+            background-size: cover;
+        }
+
+        .book-input {
+            display: block;
+            margin: auto;
+            width: 70%;
+            padding: 5px 10px;
+            font-size: 20px;
+            margin-top: 7px;
+            border-radius: 4px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .bookgas-headin{
+            font-size: 35px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .bookgas-main{
+            margin: 20px 10px;
+            padding: 20px;
+            background: rgba(255, 255, 255,.8);
+            border-radius: 10px;
+        }
+        .bookgas-button{
+            font-size: 25px;
+            font-weight: bold;
+            padding: 5px 20px;
+            margin-top: 15px;
+            border: 0;
+            border-radius: 5px;
+            box-shadow: 0 0 5px 4px gray;
+            background: linear-gradient(brown, yellow);
+        }
+    </style>
+    
+</head>
+
+<body>
+    {% include 'admin_navigation.html' %}
+    <div class="row m-auto justify-content-center">
+        <div class="col-7 bookgas-main mt-4">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row ">
+                    <div class="bookgas-headin text-center mb-4">Update Package Details</div>
+                    <div class="col-6 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Package Name:<span class="text-danger">*</span>:</label>
+                            <input type="text" class="form-control" name="pname" value="{{ data.name }}" placeholder="Enter name" required />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Price per Person:<span class="text-danger">*</span>:</label>
+                            <input type="text" class="form-control" name="price" value="{{ data.price }}" placeholder="Enter Price of per Person" required />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">State:<span class="text-danger">*</span>:</label>
+                            <input type="text" class="form-control" name="city" value="{{ data.city }}" placeholder="Enter City of Package" required />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Duration:<span class="text-danger">*</span>:</label>
+                            <input type="number" class="form-control" value="{{ data.duration }}" name="duration" placeholder="Enter duration of Package" required />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            {% if data.packageType == 'Rivers' %}
+                            <label class="form-label fw-bolder">Package Type:</label>
+                                <select class="form-control" name="packageType">
+                                    <option value="Mountain">Mountain</option>
+                                    <option value="Trees">Tree</option>
+                                    <option value="Beach" selected>Beach</option>
+                                    <option value="Rivers">Rivers</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            {% endif %}
+                            {% if data.packageType == 'Mountain' %}
+                            <label class="form-label fw-bolder">Package Type:</label>
+                                <select class="form-control" name="packageType">
+                                    <option value="Mountain" selected>Mountain</option>
+                                    <option value="Trees">Tree</option>
+                                    <option value="Beach">Beach</option>
+                                    <option value="Rivers">Rivers</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            {% endif %}
+                            {% if data.packageType == 'Trees' %}
+                            <label class="form-label fw-bolder">Package Type:</label>
+                                <select class="form-control" name="packageType">
+                                    <option value="Mountain">Mountain</option>
+                                    <option value="Trees" selected>Tree</option>
+                                    <option value="Beach">Beach</option>
+                                    <option value="Rivers">Rivers</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            {% endif %}
+                            {% if data.packageType == 'Beach' %}
+                            <label class="form-label fw-bolder">Package Type:</label>
+                                <select class="form-control" name="packageType">
+                                    <option value="Mountain">Mountain</option>
+                                    <option value="Trees">Tree</option>
+                                    <option value="Beach" selected>Beach</option>
+                                    <option value="Rivers">Rivers</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            {% endif %}
+                            {% if data.packageType == 'Others' %}
+                            <label class="form-label fw-bolder">Package Type:</label>
+                                <select class="form-control" name="packageType">
+                                    <option value="Mountain">Mountain</option>
+                                    <option value="Trees">Tree</option>
+                                    <option value="Beach">Beach</option>
+                                    <option value="Rivers">Rivers</option>
+                                    <option value="Others" selected>Others</option>
+                                </select>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Image 1:<span class="text-danger">*</span>:</label>
+                            <input type="file" class="form-control" name="packimg" />
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Image 2:</label>
+                            <input type="file" class="form-control" name="packimgg" />
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Image 3:</label>
+                            <input type="file" class="form-control" name="packimggg" />
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Image 1:<span class="text-danger">*</span>:</label>
+                            <img class="form-control" src="{{data.image1.url}}" height="100" width="100" />
+                        </div>
+                    </div>
+                    {% if data.image2 != 0 %}
+                    <div class="col-4 col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Image 2:<span class="text-danger">*</span>:</label>
+                            <img class="form-control" src="{{data.image2.url}}" height="100" width="100" />
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if data.image3 != 0 %}
+                    <div class="col-4 col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Image 3:<span class="text-danger">*</span>:</label>
+                            <img class="form-control" src="{{data.image3.url}}" height="100" width="100" />
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <label class="form-label fw-bolder">Description:</label>
+                            <textarea class="form-control" name="desc" placeholder="Write Package Full Description" style="resize: none;">{{ data.description }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 text-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary mt-4"><i class="fa-solid fa-upload"></i> Update Package</i> </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+{% if error == "no" %}
+<script>
+    alert("Package Updated Successfully")
+    window.location = ("{% url 'manage_package' %}")
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Somethig went wrong. Try again later...")
+    window.location = ("{% url 'manage_package' %}")
+</script>
+{% endif %}
+
+{% include 'footer.htm' %}

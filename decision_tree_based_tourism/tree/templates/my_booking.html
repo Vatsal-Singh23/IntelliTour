@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>IntelliTour</title>
+</head>
+<style>
+    body
+    {
+        background-image: url("/static/images/login1.jpg");
+    }
+    .user-base{
+        padding-bottom: 30px;
+        background-image: url("/static/images/login1.jpg");
+        
+        
+    }
+    .user-heading{
+        text-align: center;
+        font-size: 42px;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
+
+<body>
+    {% include 'user_navigation.html' %}
+    <div class="user-base p-5">
+        <div class="user-heading">
+            My Booking
+        </div>
+        <div class="row m-auto users-base justify-content-center mt-2">
+            <div class="col-11 col-md-11" style="border:1px solid black;border-radius:15px;">
+                <table class="table">
+                    <tr style="background:lightgray;">
+                        <th>Package ID</th>
+                        <th>Package Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>City</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                    {% for i in data %}
+                    {% if i.email == user.username %}
+                    <tr>
+                        <td>{{ i.packageID }} </td>
+                        <td>{{ i.packagename }}</td>
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.number }}</td>
+                        <td>{{ i.date }}</td>
+                        <td>{{ i.type }}</td>
+                        <td>{{ i.city }}</td>
+                        <td>{{ i.amount }}</td>
+                        <td>{{ i.status }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+                {% if not data %}
+                    <h1 align="center">No Data Found</h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% include 'footer.htm' %}

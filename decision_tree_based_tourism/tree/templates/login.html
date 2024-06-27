@@ -1,0 +1,86 @@
+
+{% include 'navigation.html' %}
+
+<style>
+    *{
+        margin: 0;
+    }
+    .login-base{
+        background:rgba(255, 255, 255, 0.348);
+        border-radius:10px;
+        background-repeat: no-repeat;
+        margin: 120px 10px;
+        box-shadow: 0 0 8px 7px rgba(255, 255, 255, 0.532);
+    }
+    .login-deep{
+
+        background-position: 40% 80%;
+        background-size: cover;
+    }
+
+    body{
+        margin: 0;
+        padding: 0;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background-image: url("/static/images/login1.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+</style>
+
+<div class="row m-auto justify-content-end login-deep">
+    <div class="col-10 col-md-5 login-base" style="margin-bottom: 300px;">
+        <form class="container mt-4" method="post" style="margin-bottom:60px;">
+            {% csrf_token %}
+            <label><b>E-mail:</b></label>
+            <input type="text" class="form-control" name="uname" placeholder="Enter Username" required>
+            <label><b>Password:</b></label>
+            <input type="password" class="form-control" name="pwd" placeholder="Enter Password" required>
+            <a href="signup" style="text-decoration: none;">Don't have account? Register here.</a>
+            <center>
+                <input type="submit" value="Login" class="btn btn-primary mt-4 p-1" style="width:150px; font-size:25px;font-weight:bold;">
+            </center>
+        </form>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+
+{% if error == "no" %}
+<script>
+    alert("Admin Login Successfully.")
+    window.location = ("{% url 'admin_home' %}")
+</script>
+{% endif %}
+
+{% if error == "not" %}
+<script>
+    window.location = ("{% url 'user_home' %}")
+</script>
+{% endif %}
+
+{% if error == "wait" %}
+<script>
+    alert("Your Login Request is Pending.");
+</script>
+{% endif %}
+
+{% if error == "out" %}
+<script>
+    alert("Your Login Request is Rejected by Admin.");
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Invalid Login Details, Try Again.")
+    window.location = ("{% url 'login' %}")
+</script>
+{% endif %}
+
+
+{% include 'footer.htm' %}

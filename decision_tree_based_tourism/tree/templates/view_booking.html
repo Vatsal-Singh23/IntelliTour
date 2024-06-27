@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>IntelliTour</title>
+    {% include 'admin_navigation.html' %}
+</head>
+<style>
+    body
+    {
+        background-image: url("/static/images/users.jpg");
+        background-size: cover;
+    }
+    .user-base{
+        padding-bottom: 30px;
+        
+    }
+    .user-heading{
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
+
+<body>
+    <div class="user-base">
+        <div class="user-heading">
+            Bookings
+        </div>
+        <div class="row m-auto users-base justify-content-center mt-3">
+            <div class="col-11 col-md-11" style="border:1px solid black;border-radius:10px;width: 100%;overflow: auto;">
+                <table class="table">
+                    <tr style="background:lightgray;">
+                        <th>Package ID</th>
+                        <th>Package Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>City</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Change Status</th>
+                    </tr>
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ i.packageID }} </td>
+                        <td>{{ i.packagename }}</td>
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.number }}</td>
+                        <td>{{ i.date }}</td>
+                        <td>{{ i.type }}</td>
+                        <td>{{ i.city }}</td>
+                        <td>{{ i.amount }}</td>
+                        <td>{{ i.status }}</td>
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <td class="d-flex">
+                                <input type="text" class="d-none" name="pid" value="{{ i.id }}" />
+                                <select name="status" class="fs-7" required>
+                                    <option selected disabled hidden value="">Change Status</option>
+                                    <option value="Cancel">Cancel</option>
+                                    <option value="Confirmed">Confirm</option>
+                                </select>
+                                <button class="btn btn-primary btn-sm">Update</button>
+                            </td>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% if not data %}
+                    <h1 align="center">No Data Found</h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% include 'footer.htm' %}

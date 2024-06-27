@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IntelliTour</title>
+    <style>
+        body {
+        margin: 0;
+        padding: 0;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background-image: url("/static/images/user_home.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        }
+
+        .userhome-main {
+            background: rgba(153, 153, 247, .6);
+            border-radius: 5px;
+            padding: 10px;
+            /* height: 480px; */
+            margin-bottom: 20px;
+        }
+
+        .profile {
+            position: relative;
+            height: 250px;
+            width: 250px;
+            margin-left: 25%;
+            border-radius: 50%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 5px 5px white;
+            
+        }
+
+
+        .welcome-heading {
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgb(255, 255, 255);
+            animation: demo2 2s alternate 1 linear;
+            color: #496989;
+        }
+
+        .edit-profile{
+            text-align: center;
+            margin: 20px 0;
+        }
+        .edit-profile a{
+            text-decoration: none;
+            font-size: 25px;
+            background: rgba(255, 255, 255, 0.8);
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 0 2px 2px black;
+        }
+    </style>
+</head>
+<body>
+    {% include 'user_navigation.html' %}
+    <div style="padding-top: 30px;">
+        <div class="row m-auto">
+            <div class="col-1"></div>
+            <div class="col-4 mt-5 userhome-main" style="background-color: rgba(255, 255, 255, 0.6);">
+                <div class="welcome-name">
+                    <div class="welcome-heading">Welcome {{request.user.first_name}}&nbsp;{{request.user.last_name}}</div>
+                    <img src="{{data.image.url}}" alt="" class="profile">
+                </div>
+                <div class="edit-profile"><a href="edit_profile">Edit Your Profile</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% include 'footer.htm' %}

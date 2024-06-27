@@ -1,0 +1,83 @@
+<style>
+    .headingTop{
+        margin: 200px 0 20px 0;
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: amazon amber;
+        text-align: center;
+    }
+</style>
+
+{% load static %}
+
+{% block body %}
+{% include 'user_navigation.html' %}
+<body style="background-image: url(/static/images/edit_profile.webp);">
+    <div class="row m-auto justify-content-around" >
+        <div class="w-100 headingTop" style="margin-top: 45px;color:cornsilk;">
+            Packages for you
+        </div>
+        <div class="col-12">
+            <div class="row mt-3 mb-3 bg-secondary p-2">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <form method="POST" action="/search">
+                            {% csrf_token %}
+                            <label class="form-label fw-bolder">Search by Package Type:</label>
+                            <select class="form-control" name="name">
+                                <option selected disabled hidden>Select Package Type</option>
+                                <option value="Mountain">Mountains</option>
+                                <option value="Trees">Trees</option>
+                                <option value="Beach">Beaches</option>
+                                <option value="Rivers">Rivers</option>
+                                <option value="Others">Others</option>
+                            </select>
+                            <input type="submit" class="btn btn-primary" value="Search" />
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label fw-bolder">Search by Price:</label>
+                        <form method="POST" action="/search2">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" name="price" placeholder="Enter price" required />
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label fw-bolder">Action:</label>
+                        <a href="{% url 'view_packages' %}" class="btn btn-warning form-control" >Reset</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for i in data %}
+        <div class="col-4 col-md-4">
+            <div class="card mb-5">
+                <img src="{{i.image1.url}}" class="card-img-top" alt="..." height="200">
+                <div class="card-body">
+                  <h5 class="card-title"><u>{{i.name}}</u></h5>
+                  <h6 class="card-title">Price: Rs.{{i.price}}/Person</h6>
+                  <h6 class="card-title">Type: {{i.packageType}}</h6>
+                  <p class="card-text">{{ i.description }}</p>
+                </div>
+                <div class="applyButton">
+                    <a class="btn btn-primary w-100" href="{% url 'book_package' i.id %}">View More Details>></a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+</body>
+{% endblock %}
+
+{% include 'footer.htm' %}
+
+
+
+
